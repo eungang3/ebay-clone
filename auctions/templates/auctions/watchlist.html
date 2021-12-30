@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>{{ category_name }}</h2>
+    {% if message %}
+    <div>{{ message }}</div>
+    {% endif %}
+    
+    {% if listings %}
+        {% include "auctions/listings_cards.html" %}
+    {% else %}
+    <p>There are no items in watchlist yet.</p>
+    <a href="/" class="btn btn-primary">Go to main</a>
+    {% endif %}
+
+{% endblock %}

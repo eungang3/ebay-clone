@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+{% load humanize %}
+{% block body %}
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+<div class="listing_container">
+    <h2>{{ listing.title}}</h2>
+
+    {% if user.is_authenticated %}
+    <form action="{% url 'watchlist' %}" method="post">
+        {% csrf_token %}
+        <!--
+        <input type=hidden name="listing" value="{{ listing.id }}">
+    -->
+        {{ form.field.as_hidden }}
+        <button class="btn btn-outline-secondary btn-sm" type="submit">Add to Watchlist</button>
+    </form>
+    {% endif %}
+    
+    <img src="{{ listing.img }}" style="max-width: 25%;" class="listing_img">
+    <p>{{ listing.description }}</p>
+    <h4>${{ listing.current_price|intcomma }}</h4>
+    
+    <h5>Details</h5>
+    <ul>
+        <li>Listed by : <a>{{ listing.seller }}</a></li>
+        <li>Category : {{ listing.category }}</li>
+        <li>Starting price : ${{ listing.starting_price }}</li>
+    </ul>
+    
+    <h5>Comments</h5>
+</div>
+
+
+{% endblock %}
